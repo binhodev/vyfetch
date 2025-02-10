@@ -19,14 +19,14 @@ console.log(response);
 
 ## 📌 Recursos Atuais
 
-| Recurso               | Descrição                                 | Status |
-| --------------------- | ----------------------------------------- | ------ |
-| ✅ Base URL Global     | Define um base URL para requisições       |        |
-| ✅ Interceptadores     | Permite manipular requisições e respostas |        |
-| ✅ Sistema de Plugins  | Suporte a extensões personalizadas        |        |
-| ✅ Suporte a SuperJSON | Transformação avançada de dados           |        |
-| ✅ Cache Integrado     | Configuração de cache para requisições    |        |
-| ✅ Configuração Global | Personalização de opções padrão           |        |
+| Recurso               | Descrição                                           | Status |
+| --------------------- | --------------------------------------------------- | ------ |
+| ✅ Base URL Global             | Define um base URL para requisições       |        |
+| ✅ Interceptadores             | Permite manipular requisições e respostas |        |
+| ✅ Sistema de Plugins (Beta)   | Suporte a extensões personalizadas        |        |
+| ✅ Suporte a SuperJSON (Beta)  | Transformação avançada de dados           |        |
+| ✅ Cache Integrado             | Configuração de cache para requisições    |        |
+| ✅ Configuração Global         | Personalização de opções padrão           |        |
 
 ## 🔮 Recursos Planejados
 
@@ -44,24 +44,6 @@ Para mais detalhes, acesse a documentação oficial: Em breve
 
 ---
 
-Criado com 💙 por [@binhodev]
-
-## Table of Contents
-
-- [Overview](#overview)
-- [Recursos Atuais](#current-features)
-- [Recursos Planejados](#planned-features)
-- [Instalação](#installation)
-- [Uso](#usage)
-  - [Como usar](#basic-usage)
-  - [Configuração Global](#global-configuration)
-  - [Plugins](#plugins)
-  - [Suporte SuperJSON](#superjson-integration)
-- [Referências da API](#api-reference)
-- [Future CLI](#future-cli)
-- [Contributing](#contributing)
-- [License](#license)
-
 ## Overview
 
 Vyfetch é um wrapper poderoso para o fetch nativo, que agrega diversas funcionalidades:
@@ -69,28 +51,6 @@ Vyfetch é um wrapper poderoso para o fetch nativo, que agrega diversas funciona
 - **Sistema de Plugins:** Possibilita a injeção de lógica customizada em pontos-chave do fluxo de requisição (pré e pós-processamento, tratamento de erros).
 - **Integração Opcional com SuperJSON (Beta):** Suporta a desserialização de tipos complexos (como Date, Map, Set, BigInt) via flag `useSuperJSON` ou função `transformResponse`.
 - **Cache, Timeout e Batching:** Mecanismos integrados para otimizar performance e evitar requisições duplicadas.
-
-## Recursos Atuais
-
-| Recurso                            | Descrição                                                                                                     |
-|------------------------------------|---------------------------------------------------------------------------------------------------------------|
-| **Wrapper do Fetch**               | Extende o fetch nativo com suporte a configurações extras e tratamento customizado de requisições.              |
-| **Configuração Global**            | Permite definir valores padrão como `baseUrl`, `timeout`, `cacheOptions`, interceptadores e callbacks globais.  |
-| **Sistema de Plugins**             | Permite registrar plugins que interceptam e transformam a requisição e a resposta.                              |
-| **Suporte Opcional com SuperJSON (Beta)** | Possibilita o uso de SuperJSON para desserialização avançada (suporte a Date, Map, Set, BigInt, etc.)            |
-| **Interceptors**                   | Executa funções antes e depois da requisição para modificar a URL, headers ou dados transformados.              |
-| **Cache, Timeout e Batching**      | Mecanismos integrados para gerenciar cache, abortar requisições com timeout e deduplicar chamadas simultâneas.   |
-
-## Recursos Planejados
-
-| Recursos Planejados                  | Descrição                                                                                                               |
-|------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
-| **CLI Interativo**                 | Desenvolvimento de uma interface de linha de comando para testes rápidos, automação e gerenciamento de configurações.   |
-| **Hooks para Next.js/React**       | Criação de hooks customizados (ex.: `useVyfetch`) para facilitar a integração com componentes React e aplicações Next.js. |
-| **Integração com Suspense**        | Suporte à renderização com Suspense, permitindo que a UI espere pela resolução de dados de forma elegante.                 |
-| **Cache Avançado e Revalidação**   | Integração com mecanismos de cache compartilhado e revalidação automática, inspirados em soluções como SWR ou React Query.  |
-| **Pipeline de Transformação**      | Permitir o encadeamento de múltiplas transformações customizadas, além do suporte a SuperJSON, para manipulação dos dados.  |
-| **Documentação Interativa**        | Criação de exemplos interativos e demos para facilitar o aprendizado e a integração da ferramenta.                         |
 
 ## Instalação
 
@@ -148,10 +108,15 @@ vyfetch('/api/data', {
 - vyfetch<T = any>(url: string, options?: SuperFetchOptions): Promise<SuperFetchResponse<T>>
 Realiza a requisição HTTP e retorna um objeto contendo:
 
--- data: Dados transformados da resposta.
-status: Código de status HTTP.
-headers: Cabeçalhos da resposta.
-fromCache: Flag indicando se os dados vieram do cache.
-duration: Tempo total da requisição (em milissegundos).
-configure(options: Partial<SuperFetchOptions>): void
-Define configurações globais para todas as requisições, incluindo baseUrl, timeout, interceptadores e outras opções.
+  - data: Dados transformados da resposta.
+  - status: Código de status HTTP.
+  - headers: Cabeçalhos da resposta.
+  - fromCache: Flag indicando se os dados vieram do cache.
+  - duration: Tempo total da requisição (em milissegundos).
+  - configure(options: Partial<SuperFetchOptions>): void
+  - Define configurações globais para todas as requisições, incluindo baseUrl, timeout, interceptadores e outras opções.
+
+
+---
+
+Criado com 💙 por [@binhodev]
