@@ -1,22 +1,63 @@
-# Vyfetch | WIP
+# VyFetch - HTTP Client para TypeScript/JavaScript 🚀 (WIP)
 
-![npm (scoped)](https://img.shields.io/npm/v/vyfetch) ![License](https://img.shields.io/npm/l/vyfetch)
+VyFetch é uma biblioteca poderosa e extensível para realizar requisições HTTP de forma simplificada, com suporte a interceptadores, sistema de plugins e transformação avançada de respostas usando SuperJSON.
 
-**Vyfetch** é um cliente HTTP avançado que estende o fetch nativo, incorporando recursos extras para facilitar a integração com APIs. Com suporte para configuração global, sistema de plugins e integração opcional com SuperJSON, o Vyfetch oferece uma abordagem modular e altamente configurável para gerenciar requisições HTTP.
+## 📦 Instalação
+
+```sh
+pnpm add vyfetch
+```
+
+## 🚀 Uso Básico
+
+```typescript
+import { vyfetch } from "vyfetch";
+
+const response = await vyfetch("/api/users");
+console.log(response);
+```
+
+## 📌 Recursos Atuais
+
+| Recurso               | Descrição                                 | Status |
+| --------------------- | ----------------------------------------- | ------ |
+| ✅ Base URL Global     | Define um base URL para requisições       |        |
+| ✅ Interceptadores     | Permite manipular requisições e respostas |        |
+| ✅ Sistema de Plugins  | Suporte a extensões personalizadas        |        |
+| ✅ Suporte a SuperJSON | Transformação avançada de dados           |        |
+| ✅ Cache Integrado     | Configuração de cache para requisições    |        |
+| ✅ Configuração Global | Personalização de opções padrão           |        |
+
+## 🔮 Recursos Planejados
+
+| Recurso                         | Descrição                              | Status |
+| ------------------------------- | -------------------------------------- | ------ |
+| ⏳ Suporte a WebSockets          | Comunicação em tempo real              |        |
+| ⏳ CLI para Gerenciamento        | Ferramenta CLI para configuração       |        |
+| ⏳ Suporte a GraphQL             | Suporte nativo para GraphQL            |        |
+| ⏳ Melhor Gerenciamento de Erros | Novas opções para tratamento de falhas |        |
+| ⏳ Extensibilidade Avançada      | Melhorias no sistema de plugins        |        |
+
+## 📖 Documentação Completa
+
+Para mais detalhes, acesse a documentação oficial: Em breve
+
+---
+
+Criado com 💙 por [@binhodev]
 
 ## Table of Contents
 
 - [Overview](#overview)
-- [Current Features](#current-features)
-- [Planned Features](#planned-features)
-- [Installation](#installation)
-- [Usage](#usage)
-  - [Basic Usage](#basic-usage)
-  - [Global Configuration](#global-configuration)
+- [Recursos Atuais](#current-features)
+- [Recursos Planejados](#planned-features)
+- [Instalação](#installation)
+- [Uso](#usage)
+  - [Como usar](#basic-usage)
+  - [Configuração Global](#global-configuration)
   - [Plugins](#plugins)
-  - [SuperJSON Integration](#superjson-integration)
-- [API Reference](#api-reference)
-- [Hooks for Next.js/React](#hooks-for-nextjsreact)
+  - [Suporte SuperJSON](#superjson-integration)
+- [Referências da API](#api-reference)
 - [Future CLI](#future-cli)
 - [Contributing](#contributing)
 - [License](#license)
@@ -26,10 +67,10 @@
 Vyfetch é um wrapper poderoso para o fetch nativo, que agrega diversas funcionalidades:
 - **Configuração Global:** Permite definir uma base URL, timeout, headers, interceptadores e callbacks que serão aplicados a todas as requisições.
 - **Sistema de Plugins:** Possibilita a injeção de lógica customizada em pontos-chave do fluxo de requisição (pré e pós-processamento, tratamento de erros).
-- **Integração Opcional com SuperJSON:** Suporta a desserialização de tipos complexos (como Date, Map, Set, BigInt) via flag `useSuperJSON` ou função `transformResponse`.
+- **Integração Opcional com SuperJSON (Beta):** Suporta a desserialização de tipos complexos (como Date, Map, Set, BigInt) via flag `useSuperJSON` ou função `transformResponse`.
 - **Cache, Timeout e Batching:** Mecanismos integrados para otimizar performance e evitar requisições duplicadas.
 
-## Current Features
+## Recursos Atuais
 
 | Recurso                            | Descrição                                                                                                     |
 |------------------------------------|---------------------------------------------------------------------------------------------------------------|
@@ -40,9 +81,9 @@ Vyfetch é um wrapper poderoso para o fetch nativo, que agrega diversas funciona
 | **Interceptors**                   | Executa funções antes e depois da requisição para modificar a URL, headers ou dados transformados.              |
 | **Cache, Timeout e Batching**      | Mecanismos integrados para gerenciar cache, abortar requisições com timeout e deduplicar chamadas simultâneas.   |
 
-## Planned Features
+## Recursos Planejados
 
-| Recurso Planejado                  | Descrição                                                                                                               |
+| Recursos Planejados                  | Descrição                                                                                                               |
 |------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
 | **CLI Interativo**                 | Desenvolvimento de uma interface de linha de comando para testes rápidos, automação e gerenciamento de configurações.   |
 | **Hooks para Next.js/React**       | Criação de hooks customizados (ex.: `useVyfetch`) para facilitar a integração com componentes React e aplicações Next.js. |
@@ -94,7 +135,7 @@ configure({
 });
 ```
 
-## Suporte ao SuperJSON Integration
+## Suporte SuperJSON
 Ative o uso do SuperJSON para transformar a resposta:
 ```typescript
 vyfetch('/api/data', {
@@ -102,3 +143,15 @@ vyfetch('/api/data', {
   useSuperJSON: true, // ou use transformResponse: (rawData, response) => SuperJSON.parse(rawData)
 });
 ```
+
+## Referências da API
+- vyfetch<T = any>(url: string, options?: SuperFetchOptions): Promise<SuperFetchResponse<T>>
+Realiza a requisição HTTP e retorna um objeto contendo:
+
+-- data: Dados transformados da resposta.
+status: Código de status HTTP.
+headers: Cabeçalhos da resposta.
+fromCache: Flag indicando se os dados vieram do cache.
+duration: Tempo total da requisição (em milissegundos).
+configure(options: Partial<SuperFetchOptions>): void
+Define configurações globais para todas as requisições, incluindo baseUrl, timeout, interceptadores e outras opções.
