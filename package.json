@@ -1,0 +1,54 @@
+{
+    "name": "vyfetch",
+    "version": "0.0.1",
+    "description": "Consume your apis in React projects quickly and easily",
+    "keywords": [
+        "fetch",
+        "axios",
+        "react",
+        "nextjs",
+        "typescript",
+        "http",
+        "api"
+    ],
+    "author": "Binho.dev <silvinhofranca.dev@icloud.com>",
+    "homepage": "https://github.com/binhodev/vyfetch#readme",
+    "license": "ISC",
+    "main": "lib/index.js",
+    "types": "lib/index.d.ts",
+    "type": "commonjs",
+    "directories": {
+        "lib": "lib"
+    },
+    "files": [
+        "lib"
+    ],
+    "publishConfig": {
+        "access": "public"
+    },
+    "scripts": {
+        "build": "tsup",
+        "lint": "eslint 'src/**/*.{ts,tsx}'",
+        "test": "jest",
+        "prepare": "pnpm run build",
+        "start": "ts-node example.ts"
+    },
+    "bugs": {
+        "url": "https://github.com/binhodev/vyfetch/issues"
+    },
+    "devDependencies": {
+        "@types/node": "^22.13.1",
+        "@typescript-eslint/eslint-plugin": "^8.24.0",
+        "@typescript-eslint/parser": "^8.24.0",
+        "eslint": "^9.20.0",
+        "superjson": "^2.2.2",
+        "ts-node": "^10.9.2",
+        "tsup": "^8.3.6",
+        "typescript": "^5.7.3",
+        "zod": "^3.24.1"
+    },
+    "peerDependencies": {
+        "superjson": "^2.2.2",
+        "zod": "^3.24.1"
+    }
+}
