@@ -29,7 +29,7 @@ function generateCacheKey(url: string, options: RequestInit): string {
     return `${url}|${method}|${headers}`;
 }
 
-export async function vyFetch<T>(
+export async function vyfetch<T>(
     url: string,
     options: VyFetchOptions & { schema?: ZodSchema<T> }
 ): Promise<VyFetchResponse<T>> {

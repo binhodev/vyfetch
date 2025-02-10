@@ -1,2 +1,2 @@
-export { vyFetch } from "./core/vyfetch.js";
-export { configure } from "./core/configure.js";
+export { vyfetch } from "./core/vyfetch";
+export { configure } from "./core/configure";

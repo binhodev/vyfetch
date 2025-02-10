@@ -1,4 +1,4 @@
-import { configure, vyFetch } from "./lib/index";
+import { configure, vyfetch } from "./lib/index";
 import z from "zod";
 
 const usersSchema = z.array(z.object({ name: z.string(), email: z.string() }));
@@ -9,7 +9,7 @@ configure({
 
 async function fetchData() {
     try {
-        await vyFetch("/users", {
+        await vyfetch("/users", {
             method: "GET",
             schema: usersSchema,
             onSuccess(data) {
