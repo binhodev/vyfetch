@@ -1,0 +1,5 @@
+---
+"vyfetch": patch
+---
+
+Fixed bugs
