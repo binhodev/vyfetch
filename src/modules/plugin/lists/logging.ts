@@ -1,6 +1,7 @@
-import type { PluginVyOptions } from "../plugin-vy";
+import { pluginVyManager, type PluginVyOptions } from "../plugin-vy";
 
 export const loggingPlugin: PluginVyOptions = {
+    pluginName: "logging",
     priority: 1,
     onRequest: async (url: string, options: RequestInit) => {
         const timestamp = new Date().toISOString();
@@ -27,3 +28,5 @@ export const loggingPlugin: PluginVyOptions = {
         console.error(`[${timestamp}] [ERROR] ${error.message}`);
     },
 };
+
+pluginVyManager.registerAvailable(loggingPlugin);
