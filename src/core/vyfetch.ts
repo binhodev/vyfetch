@@ -7,7 +7,11 @@ import {
     isValidUrl,
     isValidHeaders,
 } from "../modules/helpers/validation-helper";
-import { pluginVyManager, PluginVyManager } from "../modules/plugin/plugin-vy";
+import {
+    pluginVyManager,
+    PluginVyManager,
+    PluginVyOptions,
+} from "../modules/plugin/plugin-vy";
 import { VyFetchOptions, VyFetchResponse } from "../types/vy-types";
 import { getGlobalConfig } from "./configure";
 
@@ -53,6 +57,20 @@ export async function vyfetch<T>(
 
     let { url: finalUrl, options: finalOptions } =
         await interceptorsVy.runRequestInterceptors(url, options);
+    let localPlugins: PluginVyOptions[] = [];
+
+    if (config.plugins) {
+        localPlugins = pluginVyManager.getLocalPlugins(config.plugins);
+
+        for (const plugin of localPlugins) {
+            if (plugin.onRequest) {
+                const result = await plugin.onRequest(finalUrl, finalOptions);
+                finalUrl = result.url;
+                finalOptions = result.options;
+            }
+        }
+    }
+
     ({ url: finalUrl, options: finalOptions } =
         await pluginVyManager.runOnRequest(finalUrl, finalOptions));
 
@@ -66,6 +84,7 @@ export async function vyfetch<T>(
     let timeoutController:
         | { signal: AbortSignal; cancel: () => void }
         | undefined;
+
     if (config.timeout && config.timeout > 0) {
         timeoutController = createTimeoutSignal(config.timeout);
         finalOptions.signal = timeoutController.signal;
@@ -129,6 +148,12 @@ export async function vyfetch<T>(
 
             data = await interceptorsVy.runResponseInterceptors(data, response);
             data = await pluginVyManager.runOnResponse(data, response);
+
+            for (const plugin of localPlugins) {
+                if (plugin.onResponse) {
+                    data = await plugin.onResponse(data, response);
+                }
+            }
 
             if (config.onSuccess) config.onSuccess(data, response);
 
