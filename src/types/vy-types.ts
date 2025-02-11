@@ -20,6 +20,7 @@ export interface VyFetchOptions extends RequestInit {
     requestStartTime?: number;
     useSuperJSON?: boolean;
     transformResponse?: (rawData: string, response: Response) => any;
+    plugins?: Partial<Record<string, boolean>>;
 }
 
 export interface VyFetchResponse<T> {
