@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.0
+
+### Minor Changes
+
+- 09a60b1: feat: adiciona suporte a plugins de logging e melhora a configuração do vyfetch
+
 ## 0.0.3
 
 ### Patch Changes
