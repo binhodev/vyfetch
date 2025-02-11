@@ -49,10 +49,11 @@ jobs:
 
             - name: Create GitHub Release
               if: steps.changesets.outputs.published == 'true'
-              uses: actions/create-release@v1
               env:
                   GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-              with:
-                  tag_name: v${{ steps.changesets.outputs.version }}
-                  release_name: Release v${{ steps.changesets.outputs.version }}
-                  body: ${{ steps.changesets.outputs.publishedPackages }}
+                  tag: ${{ github.ref_name }}
+              run: |
+                  gh release create "$tag" \
+                      --repo="$GITHUB_REPOSITORY" \
+                      --title="${tag#v}" \
+                      --generate-notes
