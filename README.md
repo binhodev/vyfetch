@@ -52,25 +52,6 @@ Vyfetch é um wrapper poderoso para o fetch nativo, que agrega diversas funciona
 - **Integração Opcional com SuperJSON (Beta):** Suporta a desserialização de tipos complexos (como Date, Map, Set, BigInt) via flag `useSuperJSON` ou função `transformResponse`.
 - **Cache, Timeout e Batching:** Mecanismos integrados para otimizar performance e evitar requisições duplicadas.
 
-## Instalação
-
-Instale o Vyfetch via npm ou yarn:
-
-```bash
-npm install vyfetch
-```
-
-## Como usar
-Uso básico
-
-```typescript
-import { vyfetch } from 'vyfetch';
-
-vyfetch('/api/data', { method: 'GET' })
-  .then(response => console.log(response.data))
-  .catch(error => console.error(error));
-```
-
 ## Configurações Globais
 
 ```typescript
