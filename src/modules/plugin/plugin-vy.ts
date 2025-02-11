@@ -1,4 +1,5 @@
-export interface PluginVy {
+export interface PluginVyOptions {
+    priority?: number;
     onRequest?(
         url: string,
         options: RequestInit
@@ -7,13 +8,21 @@ export interface PluginVy {
         | { url: string; options: RequestInit }
     >;
     onResponse?(data: any, response: Response): Promise<any> | any;
+    onError?(error: any): void;
 }
 
 export class PluginVyManager {
-    private plugins: PluginVy[] = [];
+    private plugins: PluginVyOptions[] = [];
 
-    register(plugin: PluginVy): void {
+    register(plugin: PluginVyOptions): void {
         this.plugins.push(plugin);
+
+        this.plugins.sort((a, b) => (a.priority || 0) - (b.priority || 0));
+    }
+
+    registerAll(plugins: PluginVyOptions[]): void {
+        plugins.forEach((plugin) => this.plugins.push(plugin));
+        this.plugins.sort((a, b) => (a.priority || 0) - (b.priority || 0));
     }
 
     public async runOnRequest(
@@ -38,4 +47,14 @@ export class PluginVyManager {
         }
         return result;
     }
+
+    public runOnError(error: any): void {
+        for (const plugin of this.plugins) {
+            if (plugin.onError) {
+                plugin.onError(error);
+            }
+        }
+    }
 }
+
+export const pluginVyManager = new PluginVyManager();

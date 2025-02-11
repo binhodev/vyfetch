@@ -1,11 +1,14 @@
-import { configure, vyfetch } from "./lib/index";
+import { configure, loggingPlugin, pluginVyManager, vyfetch } from "./lib";
 import z from "zod";
 
 const usersSchema = z.array(z.object({ name: z.string(), email: z.string() }));
 
 configure({
     baseUrl: "https://jsonplaceholder.typicode.com",
+    registerAll: [loggingPlugin],
 });
+
+// pluginVyManager.register(loggingPlugin);
 
 async function fetchData() {
     try {

@@ -7,14 +7,14 @@ import {
     isValidUrl,
     isValidHeaders,
 } from "../modules/helpers/validation-helper";
-import { PluginVyManager } from "../modules/plugin/plugin-vy";
+import { pluginVyManager, PluginVyManager } from "../modules/plugin/plugin-vy";
 import { VyFetchOptions, VyFetchResponse } from "../types/vy-types";
 import { getGlobalConfig } from "./configure";
 
 const interceptorsVy = new InterceptorVyManager();
 const cacheVy = new CacheVyManager();
 const batchVy = new BatchVyManager();
-const pluginVy = new PluginVyManager();
+// const pluginVy = new PluginVyManager();
 
 function mergeConfigs(
     config1: Partial<VyFetchOptions>,
@@ -53,10 +53,8 @@ export async function vyfetch<T>(
 
     let { url: finalUrl, options: finalOptions } =
         await interceptorsVy.runRequestInterceptors(url, options);
-    ({ url: finalUrl, options: finalOptions } = await pluginVy.runOnRequest(
-        finalUrl,
-        finalOptions
-    ));
+    ({ url: finalUrl, options: finalOptions } =
+        await pluginVyManager.runOnRequest(finalUrl, finalOptions));
 
     const key = generateCacheKey(finalUrl, finalOptions);
 
@@ -130,7 +128,7 @@ export async function vyfetch<T>(
             }
 
             data = await interceptorsVy.runResponseInterceptors(data, response);
-            data = await pluginVy.runOnResponse(data, response);
+            data = await pluginVyManager.runOnResponse(data, response);
 
             if (config.onSuccess) config.onSuccess(data, response);
 
@@ -152,6 +150,7 @@ export async function vyfetch<T>(
         })
         .catch((error) => {
             if (config.onError) config.onError(error as Error);
+            pluginVyManager.runOnError(error as Error);
             throw error;
         })
         .finally(() => {
