@@ -48,7 +48,7 @@ jobs:
                   NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
             - name: Create GitHub Release
-              if: steps.changesets.outputs.published == 'true'
+            #  if: steps.changesets.outputs.published == 'true'
               env:
                   GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
                   tag: ${{ github.ref_name }}
