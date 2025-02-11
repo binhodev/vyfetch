@@ -35,7 +35,9 @@
         "changeset": "changeset",
         "version-packages": "changeset version",
         "release": "pnpm build && changeset publish",
-        "postinstall": "pnpm run build"
+        "postinstall": "pnpm run build",
+        "test:coverage": "vitest run --coverage",
+        "test:watch": "vitest watch"
     },
     "bugs": {
         "url": "https://github.com/binhodev/vyfetch/issues"
@@ -45,6 +47,7 @@
         "@types/node": "^22.13.1",
         "@typescript-eslint/eslint-plugin": "^8.24.0",
         "@typescript-eslint/parser": "^8.24.0",
+        "@vitest/coverage-v8": "^3.0.5",
         "eslint": "^9.20.0",
         "superjson": "^2.2.2",
         "ts-node": "^10.9.2",

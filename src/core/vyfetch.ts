@@ -31,7 +31,7 @@ function generateCacheKey(url: string, options: RequestInit): string {
 
 export async function vyfetch<T>(
     url: string,
-    options: VyFetchOptions & { schema?: ZodSchema<T> }
+    options: VyFetchOptions & { schema?: ZodSchema<T> } = {}
 ): Promise<VyFetchResponse<T>> {
     const config = mergeConfigs(getGlobalConfig(), options);
 
@@ -80,9 +80,7 @@ export async function vyfetch<T>(
             const duration = Date.now() - requestStartTime;
 
             return {
-                data: cachedData,
-                status: 200,
-                headers: new Headers(),
+                ...cachedData,
                 fromCache: true,
                 duration,
             };
@@ -136,19 +134,21 @@ export async function vyfetch<T>(
 
             if (config.onSuccess) config.onSuccess(data, response);
 
-            if (config.cacheOptions?.ttl && config.cacheOptions.ttl > 0) {
-                cacheVy.set(key, data, config.cacheOptions.ttl);
-            }
-
             const duration = Date.now() - requestStartTime;
 
-            return {
+            const result: VyFetchResponse<T> = {
                 data,
                 status: response.status,
                 headers: response.headers,
                 fromCache: false,
                 duration,
             };
+
+            if (config.cacheOptions?.ttl && config.cacheOptions.ttl > 0) {
+                cacheVy.set(key, result, config.cacheOptions.ttl);
+            }
+
+            return result;
         })
         .catch((error) => {
             if (config.onError) config.onError(error as Error);
