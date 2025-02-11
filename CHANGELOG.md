@@ -1,6 +1,12 @@
 # Changelog
-<<<<<<< HEAD
-=======
+
+## 0.0.3
+
+### Patch Changes
+
+- 9c19f03: Fixed bugs
+  <<<<<<< HEAD
+  =======
 
 ## 0.0.2
 
@@ -30,4 +36,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full test coverage
 - CI/CD pipeline with GitHub Actions
 - Automated releases with Changesets
->>>>>>> fb56f60f25d3c7d2a2f444bad8f531cc2227678d
+  > > > > > > > fb56f60f25d3c7d2a2f444bad8f531cc2227678d
