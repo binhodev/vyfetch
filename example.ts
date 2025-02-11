@@ -5,7 +5,6 @@ const usersSchema = z.array(z.object({ name: z.string(), email: z.string() }));
 
 configure({
     baseUrl: "https://jsonplaceholder.typicode.com",
-    registerAll: [loggingPlugin],
 });
 
 // pluginVyManager.register(loggingPlugin);
@@ -18,6 +17,7 @@ async function fetchData() {
             onSuccess(data) {
                 console.log("Users data: ", data);
             },
+            plugins: { logging: true },
         });
         // console.log("Dados:", response.data);
     } catch (error) {
