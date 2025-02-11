@@ -1,4 +1,5 @@
 export interface PluginVyOptions {
+    pluginName?: string;
     priority?: number;
     onRequest?(
         url: string,
@@ -13,16 +14,36 @@ export interface PluginVyOptions {
 
 export class PluginVyManager {
     private plugins: PluginVyOptions[] = [];
+    private availablePlugins: Record<string, PluginVyOptions> = {};
 
-    register(plugin: PluginVyOptions): void {
+    public register(plugin: PluginVyOptions): void {
         this.plugins.push(plugin);
 
         this.plugins.sort((a, b) => (a.priority || 0) - (b.priority || 0));
     }
 
-    registerAll(plugins: PluginVyOptions[]): void {
+    public registerAll(plugins: PluginVyOptions[]): void {
         plugins.forEach((plugin) => this.plugins.push(plugin));
         this.plugins.sort((a, b) => (a.priority || 0) - (b.priority || 0));
+    }
+
+    public registerAvailable(plugin: PluginVyOptions): void {
+        if (plugin.pluginName) {
+            this.availablePlugins[plugin.pluginName] = plugin;
+        }
+    }
+
+    public getLocalPlugins(
+        flags: Partial<Record<string, boolean>>
+    ): PluginVyOptions[] {
+        const localPlugins: PluginVyOptions[] = [];
+
+        for (const key in flags) {
+            if (flags[key] && this.availablePlugins[key]) {
+                localPlugins.push(this.availablePlugins[key]);
+            }
+        }
+        return localPlugins;
     }
 
     public async runOnRequest(
