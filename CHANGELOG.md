@@ -4,56 +4,49 @@
 
 ### Minor Changes
 
-- f438afc: feat: adiciona suporte a plugins na interface VyFetchOptions
+- **Suporte a Plugins na Interface `VyFetchOptions`**  
+  - Agora a interface `VyFetchOptions` permite o uso de plugins para estender funcionalidades de requisições.  
 
-  feat: adiciona suporte para registro e recuperação de plugins disponíveis na classe PluginVyManager
+- **Gerenciador de Plugins (`PluginVyManager`)**  
+  - Adicionado suporte para registro e recuperação de plugins disponíveis na classe `PluginVyManager`.  
 
-  feat: registra o plugin de logging no gerenciador de plugins
+- **Registro do Plugin de Logging**  
+  - O gerenciador de plugins agora registra o plugin de logging automaticamente.  
 
-  feat: adiciona suporte a plugins de requisição e resposta na função vyfetch
+- **Plugins de Requisição e Resposta no `vyfetch`**  
+  - Implementado suporte para plugins de requisição e resposta na função `vyfetch`, permitindo maior flexibilidade na manipulação de requisições e respostas.  
 
-  feat:(example) remove registro do plugin de logging na configuração e adiciona suporte a plugins na função fetchData
+### 🔧 Melhorias  
+- **(Exemplo) Suporte a Plugins na Função `fetchData`**  
+  - Removido o registro manual do plugin de logging na configuração e adicionada compatibilidade com o novo sistema de plugins na função `fetchData`.  
 
 ## 0.1.0
 
 ### Minor Changes
 
-- 09a60b1: feat: adiciona suporte a plugins de logging e melhora a configuração do vyfetch
+- **Suporte a Plugins de Logging**  
+  - Adicionado suporte para plugins de logging, permitindo a captura e monitoramento de logs durante requisições.  
+
+- **Melhoria na Configuração do `vyfetch`**  
+  - Ajustada a configuração do `vyfetch` para maior flexibilidade e compatibilidade com o novo sistema de plugins.
 
 ## 0.0.3
 
 ### Patch Changes
 
-- 9c19f03: Fixed bugs
-  <<<<<<< HEAD
-  =======
+- **Correção de Bugs**  
+  - Resolvidos problemas internos para melhorar a estabilidade e funcionamento do package.
 
 ## 0.0.2
 
 ### Patch Changes
 
-- e633ebf: feat: adiciona configuração do Changesets e workflows de CI e release
-- f7a49d9: feat: adiciona configuração do Changesets e workflows de CI e release
+- **Configuração do Changesets**  
+  - Adicionado suporte ao **Changesets** para controle de versionamento e geração automática de changelogs.  
 
-All notable changes to this project will be documented in this file.
+- **Workflows de CI e Release**  
+  - Implementados workflows de **CI (Integração Contínua)** e **Release** para automatizar a publicação de novas versões.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+## 0.0.1
 
-## [Unreleased]
-
-### Added
-
-- Initial release of vyfetch
-- Core fetch functionality with TypeScript support
-- Cache module for response caching
-- Batch request handling
-- Request/Response interceptors
-- Plugin system
-- Timeout handling
-- URL and headers sanitization
-- Input validation
-- Full test coverage
-- CI/CD pipeline with GitHub Actions
-- Automated releases with Changesets
-  > > > > > > > fb56f60f25d3c7d2a2f444bad8f531cc2227678d
+- Versão inicial do vyfetch
