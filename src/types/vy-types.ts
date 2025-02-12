@@ -12,7 +12,7 @@ export interface InterceptorOptions {
 export interface VyFetchOptions extends RequestInit {
     baseUrl?: string;
     timeout?: number;
-    cacheOptions?: { ttl?: number };
+    cacheOptions?: { ttl?: number; staleWhileRevalidate?: boolean };
     interceptors?: InterceptorOptions;
     schema?: ZodSchema<any>;
     onSuccess?: (data: any, response: Response) => void;
