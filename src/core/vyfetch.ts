@@ -7,18 +7,13 @@ import {
     isValidUrl,
     isValidHeaders,
 } from "../modules/helpers/validation-helper";
-import {
-    pluginVyManager,
-    PluginVyManager,
-    PluginVyOptions,
-} from "../modules/plugin/plugin-vy";
+import { pluginVyManager, PluginVyOptions } from "../modules/plugin/plugin-vy";
 import { VyFetchOptions, VyFetchResponse } from "../types/vy-types";
 import { getGlobalConfig } from "./configure";
 
 const interceptorsVy = new InterceptorVyManager();
 const cacheVy = new CacheVyManager();
 const batchVy = new BatchVyManager();
-// const pluginVy = new PluginVyManager();
 
 function mergeConfigs(
     config1: Partial<VyFetchOptions>,
@@ -28,8 +23,11 @@ function mergeConfigs(
 }
 
 function generateCacheKey(url: string, options: RequestInit): string {
-    const method = options.method || "GET";
-    const headers = options.headers ? JSON.stringify(options.headers) : "";
+    const { signal, ...cleanOptions } = options;
+    const method = cleanOptions.method || "GET";
+    const headers = cleanOptions.headers
+        ? JSON.stringify(cleanOptions.headers)
+        : "";
     return `${url}|${method}|${headers}`;
 }
 
@@ -91,7 +89,15 @@ export async function vyfetch<T>(
     }
 
     if (config.cacheOptions?.ttl && config.cacheOptions.ttl > 0) {
-        const cachedData = cacheVy.get(key);
+        const cachedData = config.cacheOptions.staleWhileRevalidate
+            ? cacheVy.getWithRevalidate(key, async () => {
+                  const response = await fetch(finalUrl, finalOptions);
+                  const rawData = await response.text();
+                  return config.useSuperJSON
+                      ? (await import("superjson")).parse(rawData)
+                      : JSON.parse(rawData);
+              })
+            : cacheVy.get(key);
 
         if (cachedData !== undefined) {
             const duration = Date.now() - requestStartTime;
@@ -169,7 +175,12 @@ export async function vyfetch<T>(
             };
 
             if (config.cacheOptions?.ttl && config.cacheOptions.ttl > 0) {
-                cacheVy.set(key, result, config.cacheOptions.ttl);
+                cacheVy.set(
+                    key,
+                    result,
+                    config.cacheOptions.ttl,
+                    config.cacheOptions.staleWhileRevalidate
+                );
             }
 
             return result;
