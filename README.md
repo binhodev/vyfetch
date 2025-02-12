@@ -42,6 +42,20 @@ console.log(response);
 | ⏳ Melhor Gerenciamento de Erros | Novas opções para tratamento de falhas |        |
 | ⏳ Extensibilidade Avançada      | Melhorias no sistema de plugins        |        |
 
+## 🔮 Plugins Planejados
+
+| **Plugins**                | **Descrição**                                                                                                                   |
+|----------------------------------|---------------------------------------------------------------------------------------------------------------------------------|
+| **Retry Plugin**                 | Realiza re-tentativas automáticas em caso de falhas transitórias, com suporte a backoff exponencial e jitter configuráveis.       |
+| **Rate Limiting Plugin**         | Controla a frequência de requisições para evitar sobrecarga e ultrapassar limites de API.                                         |
+| **Monitoring/Tracing Plugin**    | Integra-se com ferramentas de tracing (como OpenTelemetry) para coletar métricas de performance e rastrear requisições.            |
+| **Authentication Plugin**        | Gerencia automaticamente tokens de autenticação (OAuth, JWT), injetando e renovando tokens sem lógica repetitiva.                 |
+| **Compression Plugin**           | Realiza compressão e descompressão automática dos dados (suporte a gzip, Brotli, etc.) para otimizar o uso de banda.              |
+| **Advanced Logging Plugin**      | Oferece logging detalhado com integração a bibliotecas como winston ou pino, possibilitando gravação em arquivos e centralização. |
+| **Transformation Plugin**        | Permite encadear múltiplas transformações customizadas para sanitização e formatação avançada dos dados de resposta.               |
+| **Distributed Cache Plugin**     | Integra com sistemas de cache distribuído (como Redis ou memcached) para compartilhar dados de cache entre múltiplas instâncias.    |
+
+
 ## 📖 Documentação Completa
 
 Para mais detalhes, acesse a documentação oficial: Em breve
