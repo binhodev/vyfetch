@@ -143,6 +143,7 @@ export async function vyfetch<T>(
                 }
             } catch (error) {
                 if (config.onError) config.onError(error as Error);
+                pluginVyManager.runOnError(error as Error);
                 throw error;
             }
 
