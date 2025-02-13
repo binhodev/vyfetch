@@ -46,7 +46,7 @@ console.log(response);
 
 | **Plugins**                | **Descrição**                                                                                                                   | **Status** |
 |----------------------------------|---------------------------------------------------------------------------------------------------------------------------------|------|
-| **Plugin de Re-tentativas**                 | Realiza re-tentativas automáticas em caso de falhas transitórias, com suporte a backoff exponencial e jitter configuráveis.       |     |
+| **Plugin de Re-tentativas**                 | Realiza re-tentativas automáticas em caso de falhas transitórias, com suporte a backoff exponencial e jitter configuráveis.       |🚧|
 | **Plugin de Rate-Limiting**         | Controla a frequência de requisições para evitar sobrecarga e ultrapassar limites de API.                                         |       |
 | **Plugin de Monitoramento/Tracing**    | Integra-se com ferramentas de tracing (como OpenTelemetry) para coletar métricas de performance e rastrear requisições.            |       |
 | **Plugin de Autenticação**        | Gerencia automaticamente tokens de autenticação (OAuth, JWT), injetando e renovando tokens sem lógica repetitiva.                 |       |
