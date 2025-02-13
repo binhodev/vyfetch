@@ -29,7 +29,7 @@ async function testCache() {
     const resp1 = await vyfetch("/users", {
         method: "GET",
         schema: usersSchema,
-        cacheOptions: { ttl: 60000 },
+        // cacheOptions: { ttl: 60000 },
         plugins: { logging: true },
         onSuccess(result) {
             console.log("Users data (primeira chamada):", result);
@@ -46,7 +46,7 @@ async function testCache() {
         const resp2 = await vyfetch("/users", {
             method: "GET",
             schema: usersSchema,
-            cacheOptions: { ttl: 60000 },
+            // cacheOptions: { ttl: 60000 },
             plugins: { logging: true },
         });
         console.log(
@@ -55,7 +55,7 @@ async function testCache() {
             `, Duration: ${resp2.duration}ms`
         );
         console.log("Users data (segunda chamada):", resp2.data);
-    }, 3000);
+    }, 10000);
 }
 
 testCache();
