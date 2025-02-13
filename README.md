@@ -46,14 +46,10 @@ console.log(response);
 
 | **Plugins**                | **Descrição**                                                                                                                   |
 |----------------------------------|---------------------------------------------------------------------------------------------------------------------------------|
-| **Retry Plugin**                 | Realiza re-tentativas automáticas em caso de falhas transitórias, com suporte a backoff exponencial e jitter configuráveis.       |
-| **Rate Limiting Plugin**         | Controla a frequência de requisições para evitar sobrecarga e ultrapassar limites de API.                                         |
-| **Monitoring/Tracing Plugin**    | Integra-se com ferramentas de tracing (como OpenTelemetry) para coletar métricas de performance e rastrear requisições.            |
-| **Authentication Plugin**        | Gerencia automaticamente tokens de autenticação (OAuth, JWT), injetando e renovando tokens sem lógica repetitiva.                 |
-| **Compression Plugin**           | Realiza compressão e descompressão automática dos dados (suporte a gzip, Brotli, etc.) para otimizar o uso de banda.              |
-| **Advanced Logging Plugin**      | Oferece logging detalhado com integração a bibliotecas como winston ou pino, possibilitando gravação em arquivos e centralização. |
-| **Transformation Plugin**        | Permite encadear múltiplas transformações customizadas para sanitização e formatação avançada dos dados de resposta.               |
-| **Distributed Cache Plugin**     | Integra com sistemas de cache distribuído (como Redis ou memcached) para compartilhar dados de cache entre múltiplas instâncias.    |
+| **Plugin de Re-tentativas**                 | Realiza re-tentativas automáticas em caso de falhas transitórias, com suporte a backoff exponencial e jitter configuráveis.       |
+| **Plugin de Rate-Limiting**         | Controla a frequência de requisições para evitar sobrecarga e ultrapassar limites de API.                                         |
+| **Plugin de Monitoramento/Tracing**    | Integra-se com ferramentas de tracing (como OpenTelemetry) para coletar métricas de performance e rastrear requisições.            |
+| **Plugin de Autenticação**        | Gerencia automaticamente tokens de autenticação (OAuth, JWT), injetando e renovando tokens sem lógica repetitiva.                 |
 
 
 ## 📖 Documentação Completa
